@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+
+
+  <script>
+  window.addEventListener('message', function (event) {
+  var iframe = document.getElementById('looker');
+  var data;
+
+  if (event.source === iframe.contentWindow) {
+    data = JSON.parse(event.data);
+    console.log(data);
+
+    if (data.type == 'page:properties:changed') {
+      //Dynamically set the iFrame height everytime the page is updated
+      iframe.style.height = data.height + 'px';
+    }
+  }
+});
+</script>
+
+
+<form action="/logout" method="POST">
+  <input type="submit" value="Logout" class="btn btn-primary btn-large btn-block" >
+  <br>
+</form>
+
+
+
+<p id="demo"></p>
+
+<script>
+    var uri_dec = decodeURIComponent('{{ url }}');
+    var res = '<span><b>Encoded URI: </b><br>'  + '{{ url }}' + "<br><br>" + '<b>Decoded URI: </b><br>' + uri_dec +'</span>';
+    document.getElementById("demo").innerHTML = res;
+</script>
+
+
+
+<center>
+  <iframe
+    id = "looker"
+    src = "{{ url }}"
+    width = "1600"
+    height = "1000"
+    frameborder = "0">
+  </iframe>
+</center>

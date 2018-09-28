@@ -1,0 +1,4 @@
+hosts:
+ 'localhost':
+    host: 'your_host_here'
+    secret: 'your_secret_here'
